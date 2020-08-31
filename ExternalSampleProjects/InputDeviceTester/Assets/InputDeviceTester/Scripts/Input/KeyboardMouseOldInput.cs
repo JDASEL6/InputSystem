@@ -14,7 +14,7 @@ public class KeyboardMouseOldInput : MonoBehaviour
     public Text m_keyboardInfoText;
     public Text m_mouseInfoText;
 
-#if ENABLE_LEGACY_INPUT_MANAGER
+#if true || ENABLE_LEGACY_INPUT_MANAGER // TODO restore
     void Update()
     {
         // Keyboard input or mouse button is pressed
@@ -26,6 +26,16 @@ public class KeyboardMouseOldInput : MonoBehaviour
             if (Input.GetKeyUp(kcode))
                 StopKeyHighlight(kcode.ToString());
         }
+
+        if (Input.anyKey)
+            StartKeyHighlight("Any Key Pressed");
+        else
+            StopKeyHighlight("Any Key Pressed");
+
+        if (Input.anyKeyDown)
+            StartKeyHighlight("Any Key Down");
+        else
+            StopKeyHighlight("Any Key Down");
 
         // Mouse move
         float moveX = Input.GetAxis("Mouse X");
